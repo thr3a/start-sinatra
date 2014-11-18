@@ -38,6 +38,14 @@ server {
 	}
 }
 ```
+ただしSocket.IOのようなWebSocketを使う場合は以下も追記
+```
+proxy_http_version 1.1;
+proxy_set_header Upgrade $http_upgrade;
+proxy_set_header Connection "upgrade";
+```
+
+
 **/etc/nginx/sites-available/unicorn**を**/etc/nginx/sites-enabled/**へシンボリックリンクを貼る
 ```
  sudo ln -s /etc/nginx/sites-available/unicorn /etc/nginx/sites-enabled/
