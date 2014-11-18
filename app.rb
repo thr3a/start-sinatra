@@ -10,6 +10,25 @@ configure :development do
 	Slim::Engine.set_default_options :pretty => true
 end
 
+configure do
+	register Sinatra::AssetPack
+	assets do
+		serve '/js', from: 'assets/js'
+		serve '/css', from: 'assets/css'
+
+		js :application, [
+			'/js/*.js'
+		]
+
+		css :application, [
+			'/css/*.css'
+		]
+
+		js_compression :closure, :level => "SIMPLE_OPTIMIZATIONS"
+		css_compression :sass
+	end
+end
+
 get '/' do
 	@message = "Hello!"
 	slim :index
