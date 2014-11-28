@@ -16,11 +16,11 @@ configure do
 		serve '/js', from: 'assets/js'
 		serve '/css', from: 'assets/css'
 
-		js :application, [
+		js :common, [
 			'/js/*.js'
 		]
 
-		css :application, [
+		css :common, [
 			'/css/*.css'
 		]
 
