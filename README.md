@@ -12,7 +12,7 @@ bundle install
 ```
 ##Sinatra単体で実行する場合
 ```
-bundle exec ruby app.rb -o 0.0.0.0
+rake
 ```
 ## Unicorn+Nginxを使って運用する場合
 予めNginxとUnicornはインストールされているものとする
@@ -21,7 +21,7 @@ bundle exec ruby app.rb -o 0.0.0.0
 **http{}**の中に以下を追記
 ```
 upstream unicorn_server_hogehoge {
-	server unix:/tmp/unicorn_hogehoge.sock;
+	server unix:/tmp/unicorn_start-sinatra.sock;
 }
 ```
 ###sites-available/unicorn
@@ -50,13 +50,10 @@ proxy_set_header Connection "upgrade";
 ```
  sudo ln -s /etc/nginx/sites-available/unicorn /etc/nginx/sites-enabled/
 ```
-実行
 ```
-unicorn_rails -c unicorn.conf --path /start-sinatra -D
-```
-停止
-```
-kill `cat unicorn.pid`
+rake start #起動
+rake stop #停止
+rake restart #再起動
 ```
 ## Licence
 
