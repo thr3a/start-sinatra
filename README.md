@@ -13,10 +13,12 @@ bundle install
 ##Sinatra単体で実行する場合
 ```
 rake
+#→ http://localhost/:4567
 ```
 ## Unicorn+Nginxを使って運用する場合
-予めNginxとUnicornはインストールされているものとする
+予めNginxはインストールされているものとする
 
+**start-sinatra**の部分は運用ディレクトリ名と同一でなければならないので注意
 ###nginx.conf
 **http{}**の中に以下を追記
 ```
@@ -27,7 +29,7 @@ upstream unicorn_server_hogehoge {
 ###sites-available/unicorn
 ```
 server {
-	server_name example.com;
+	server_name _;
 	listen 80;
 	location /start-sinatra/ {
 		proxy_pass http://unicorn_server_hogehoge;
