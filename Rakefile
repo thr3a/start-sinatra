@@ -1,6 +1,7 @@
 task :start do
-	dir = File.dirname(__FILE__)
-	system("bundle exec unicorn_rails -c #{dir}/unicorn.conf --path /#{ENV['N']} --listen /tmp/unicorn_#{ENV['N']}.sock -D")
+	#カレントディレクトリのディレクトリ名を取得
+	dir = `pwd`.split("/").last.delete("\n")
+	system("bundle exec unicorn_rails -c unicorn.conf --path /#{dir} --listen /tmp/unicorn_#{dir}.sock -D")
 end
 
 task :stop do
